@@ -1,0 +1,32 @@
+model Vote {
+    id String @id @default(cuid())
+
+    Voter   Student @relation(fields: [voterId], references: [studentId])
+    voterId String
+
+    Position   Position @relation(fields: [positionId], references: [id])
+    positionId String
+
+    Election   Election @relation(fields: [electionId], references: [id])
+    electionId String
+
+    createdAt DateTime @default(now())
+
+    @@unique([electionId, positionId, voterId])
+}
+
+model Election {
+    id          String  @id @default(cuid())
+    name        String
+    description String?
+
+    startDate DateTime
+    endDate   DateTime
+    isActive  Boolean  @default(true)
+
+    createdAt DateTime @default(now())
+
+    Votes Vote[]
+
+    @@index([isActive])
+}
