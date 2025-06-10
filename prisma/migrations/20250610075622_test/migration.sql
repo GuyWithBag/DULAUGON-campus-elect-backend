@@ -2,6 +2,7 @@
 CREATE TABLE "Position" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
+    "electionId" TEXT NOT NULL,
 
     CONSTRAINT "Position_pkey" PRIMARY KEY ("id")
 );
@@ -34,6 +35,7 @@ CREATE TABLE "Election" (
     "startDate" TIMESTAMP(3) NOT NULL,
     "endDate" TIMESTAMP(3) NOT NULL,
     "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "notes" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Election_pkey" PRIMARY KEY ("id")
@@ -61,6 +63,9 @@ CREATE UNIQUE INDEX "Student_studentId_key" ON "Student"("studentId");
 
 -- CreateIndex
 CREATE INDEX "Student_studentId_idx" ON "Student"("studentId");
+
+-- AddForeignKey
+ALTER TABLE "Position" ADD CONSTRAINT "Position_electionId_fkey" FOREIGN KEY ("electionId") REFERENCES "Election"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Candidate" ADD CONSTRAINT "Candidate_positionId_fkey" FOREIGN KEY ("positionId") REFERENCES "Position"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
