@@ -1,6 +1,6 @@
 import { PrismaService } from 'src/prisma.service'
-import { Injectable } from '@nestjs/common';
-import { Student } from '@prisma/client'; // Assuming Student is a model in your Prisma schema
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Student } from '@prisma/client'; // Assuming Student is a model in your Prisma schema 
 
 @Injectable()
 export class UsersService {
@@ -14,6 +14,22 @@ export class UsersService {
      */
     async findAllStudents(): Promise<Student[]> {
         return this.prisma.student.findMany();
+    }
+
+    async findStudentById({ id }: {id: Student['studentId']}): Promise<Student> {
+        const student = await this.prisma.student.findUnique({
+            where: {
+                studentId: id
+            }
+        })
+
+        if (!student) {
+            // Use NotFoundException for proper HTTP Handling 
+            // @see nest/common
+            throw new NotFoundException("Student not found")
+        }
+
+        return student
     }
 }
 
