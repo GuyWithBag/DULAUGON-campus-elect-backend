@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Student, $Enum } from '@prisma/client';
+import { Student, $Enums } from '@prisma/client';
 
 export class ReturnedStudentDto implements Partial<Student> {
     @ApiProperty({
@@ -27,8 +27,8 @@ export class ReturnedStudentDto implements Partial<Student> {
 
     @ApiProperty({
         description: 'The role of the student',
-        example: $Enum.Role.STUDENT,
-        enum: $Enum.Role,
+        example: $Enums.Role.STUDENT,
+        enum: $Enums.Role,
 
     })
     role: $Enums.Role
