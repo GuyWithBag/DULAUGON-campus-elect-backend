@@ -40,6 +40,20 @@ export class UsersController {
     }
 
     @Get('students/find') 
+        @ApiOperation({
+        summary: 'Get a student using an ID',
+        description: 'Retrieves a student using a student ID from the system.'
+    })
+    @ApiResponse({
+        status: 200,
+        description: 'Student retrieved successfully.',
+        type: ReturnedStudentDto
+    })
+    @ApiQuery({ 
+      name: 'id', 
+      type: String, 
+      description: 'Student ID to search for' 
+    })
     async findStudentById(
         @Query('id') id: Student['studentId'] 
     ) {
