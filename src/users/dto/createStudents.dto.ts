@@ -4,24 +4,24 @@ import { Student, $Enums } from '@prisma/client';
 export class CreateStudentDto implements Partial<Student> {
     @ApiProperty({
             description: 'The unique identifier of the student',
-            example: '123def',
+            example: '123defg',
         })
         studentId: string;
         @ApiProperty({
             description: 'The name of the student',
-            example: 'Information Technology',
+            example: 'Computer Science',
         })
         department: string;
     
         @ApiProperty({
             description: 'The mail',
-            example: 'asdas@addu.edu.ph',
+            example: 'Maria@addu.edu.ph',
         })
         email: string;
     
         @ApiProperty({
             description: 'The name of the student',
-            example: 'Maria Smith',
+            example: 'Maria Kawasaki',
         })
         name: string; 
     
