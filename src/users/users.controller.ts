@@ -15,6 +15,7 @@ import {
   ApiResponse,
   ApiConflictResponse,
   ApiTags,
+  ApiBody,
 
  } from '@nestjs/swagger';
 import { ReturnedStudentDto } from 'src/users/dto/returnedStudents.dto'; 
@@ -74,6 +75,10 @@ export class UsersController {
   })
   @ApiConflictResponse({
     description: 'Student with this ID already exists.',
+  })
+  @ApiBody({
+    type: CreateStudentDto, // Reference the DTO class
+    description: 'Details of the student to create', // Accurate description
   })
   async createStudent(
     @Body() createStudentDto: CreateStudentDto,
